@@ -1,4 +1,4 @@
-name: Example CI
+name: Example CI (not pure python)
 
 
 on:
@@ -63,15 +63,13 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "pyproject.toml"
 
-      - name: Set up Python
-        run: uv python install
+      - name: Build wheels
+        uses: pypa/cibuildwheel@v2.21
 
-      - name: Build with cibuildwheel
-        run: |
-          uv venv
-          uv pip install cibuildwheel
-          uv sync --all-extras --dev
-          cibuildwheel
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cibw-wheels-cp${{ matrix.python }}-${{ matrix.platform_id }}-${{ strategy.job-index }}
+          path: ./wheelhouse/*.whl
 
  # === Release Job ===
   release:
@@ -81,9 +79,11 @@ jobs:
 
     steps:
       - name: Download wheel artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
-          name: wheelhouse-*
+          pattern: cibw-*
+          path: dist
+          merge-multiple: true
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
