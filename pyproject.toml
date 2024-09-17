@@ -7,7 +7,7 @@ name = "example"
 authors = [
     { name="Kuroda Kazuki", email="maleicacid824+dev@gmail.com" }
 ]
-requires-python = ">=3.8"  # tomllibは>=3.11
+requires-python = ">=3.9"
 classifiers = [
     "Programming Language :: Rust",
     "Programming Language :: Python :: Implementation :: CPython",

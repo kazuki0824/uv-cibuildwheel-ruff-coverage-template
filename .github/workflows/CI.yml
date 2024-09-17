@@ -50,6 +50,7 @@ jobs:
       fail-fast: true
 
     runs-on: ${{ matrix.os }}
+    needs: check
 
     steps:
       - uses: actions/checkout@v4
