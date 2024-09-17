@@ -1,0 +1,1 @@
+# python-cibuildwheel-ruff-coverage-template
