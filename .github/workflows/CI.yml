@@ -29,7 +29,7 @@ jobs:
         run: uv run ruff .
 
       - name: Install Rust
-        use: dtolnay/rust-toolchain@stable
+        uses: dtolnay/rust-toolchain@stable
 
       - name: Run Rustfmt
         run: cargo fmt --check
