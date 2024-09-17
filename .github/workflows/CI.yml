@@ -23,7 +23,7 @@ jobs:
         uses: astral-sh/setup-uv@v2
         with:
           enable-cache: true
-          cache-dependency-glob: [ "pyproject.toml", "uv.lock" ]
+          cache-dependency-glob: "pyproject.toml"
 
       - name: Run Ruff
         run: uv run ruff .
