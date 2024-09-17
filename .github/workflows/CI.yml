@@ -66,11 +66,12 @@ jobs:
       - name: Set up Python
         run: uv python install
 
-      - name: Install the project
-        run: uv sync --all-extras --dev
-
       - name: Build with cibuildwheel
-        run: uv run cibuildwheel
+        run: |
+          uv venv
+          uv pip install cibuildwheel
+          uv sync --all-extras --dev
+          uv run cibuildwheel
 
  # === Release Job ===
   release:
