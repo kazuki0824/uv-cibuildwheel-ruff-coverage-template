@@ -69,7 +69,7 @@ jobs:
       - name: Build with cibuildwheel
         run: |
           uv venv
-          uv pip install cibuildwheel -y
+          uv pip install cibuildwheel
           uv sync --all-extras --dev
           cibuildwheel
 
