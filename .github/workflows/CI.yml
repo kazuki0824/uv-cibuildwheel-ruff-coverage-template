@@ -36,11 +36,6 @@ jobs:
       - name: Run Rustfmt
         run: cargo fmt --check
 
-#      - name: Install MSVC (Windows Only)
-#        if: runner.os == 'Windows'
-#        run: |
-#          choco install visualstudio2022buildtools --version=17.5.3 --package-parameters "--add Microsoft.VisualStudio.Component.VC.Tools.x86.x64"
-
       - name: Run cargo check
         run: cargo check
 
