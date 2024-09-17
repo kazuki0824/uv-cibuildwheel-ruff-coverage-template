@@ -63,6 +63,9 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "pyproject.toml"
 
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+        
       - name: Build wheels
         uses: pypa/cibuildwheel@v2.21
 
