@@ -23,10 +23,10 @@ jobs:
         uses: astral-sh/setup-uv@v2
         with:
           enable-cache: true
-          cache-dependency-glob: "pyproject.toml"
 
       - name: Run Ruff
         run: |
+          uv venv
           uv pip install ruff
           uv run ruff .
 
