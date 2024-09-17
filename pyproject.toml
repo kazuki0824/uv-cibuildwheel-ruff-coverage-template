@@ -60,6 +60,6 @@ archs = ["auto64"]
 
 [tool.cibuildwheel.linux]
 archs = ["auto64"]
-before-all = "yum install -y curl && curl -sSf https://sh.rustup.rs | sh -s -- -y"
+before-all = "curl -sSf https://sh.rustup.rs | sh -s -- -y"
 environment = 'PATH="$PATH:$HOME/.cargo/bin" CARGO_NET_GIT_FETCH_WITH_CLI="true"'
 #repair-wheel-command = "auditwheel repair -w {dest_dir} {wheel} && pipx run abi3audit==0.0.9 --strict --report {wheel}"
