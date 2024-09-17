@@ -1,0 +1,62 @@
+[build-system]
+requires = ["setuptools>=64", "setuptools-scm>=8", "setuptools-rust"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "example"
+authors = [
+    { name="Kuroda Kazuki", email="maleicacid824+dev@gmail.com" }
+]
+requires-python = ">=3.8"  # tomllibは>=3.11
+classifiers = [
+    "Programming Language :: Rust",
+    "Programming Language :: Python :: Implementation :: CPython",
+]
+dynamic = ["version"]
+dependencies = [
+    "numpy<2",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff"
+]
+
+[tool.setuptools.packages]
+# Pure Python packages/modules
+find = { where = ["src"] }
+
+[[tool.setuptools-rust.ext-modules]]
+# Private Rust extension module to be nested into Python package
+target = "hello_world._lib"  # The last part of the name (e.g. "_lib") has to match lib.name in Cargo.toml,
+                             # but you can add a prefix to nest it inside of a Python package.
+binding = "PyO3"  # Default value, can be omitted
+
+[tool.ruff]
+target-version = "py311"
+line-length = 141
+exclude = [".mypy_cache"]
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "C90"]
+ignore = ["E203", "F405"]
+exclude = [
+    ".venv",
+    ".git",
+    ".tox",
+    ".eggs",
+    "dist",
+    "doc",
+    "build",
+]
+
+[tool.cibuildwheel]
+build = ["cp39-*", "cp310-*", "cp311-*", "cp312-*"]
+# Use uv and build
+build-frontend = "build[uv]"
+
+[tool.cibuildwheel.windows]
+archs = ["auto64"]
+
+[tool.cibuildwheel.linux]
+archs = ["auto64"]
