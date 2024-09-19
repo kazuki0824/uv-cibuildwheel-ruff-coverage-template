@@ -9,7 +9,12 @@ on:
   release:
     types:
       - created
-  workflow_dispatch:
+  workflow_call:
+    inputs:
+      pure:
+        type: boolean
+        description: "The project is pure Python or not"
+        default: false
 
 jobs:
   check:
@@ -41,6 +46,7 @@ jobs:
 
   buildwheel:
     name: Build
+    if: github.event_name != 'pull_request'
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest]
