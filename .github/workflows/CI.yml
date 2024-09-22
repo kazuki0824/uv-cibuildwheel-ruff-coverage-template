@@ -27,10 +27,14 @@ jobs:
         uses: Swatinem/rust-cache@v2
 
       - name: Run Rustfmt
-        run: cargo fmt --check
+        run: |
+          cd ./rust/
+          cargo fmt --check
 
       - name: Run cargo check
-        run: cargo check
+        run: |
+          cd ./rust/
+          cargo check
 
   buildwheel:
     name: Build
