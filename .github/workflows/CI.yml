@@ -1,24 +1,12 @@
-name: Example CI (not pure python)
+name: Check, Build, and Release (not pure python)
 
 
 on:
-  pull_request:
-  push:
-    branches:
-      - main
-  release:
-    types:
-      - created
   workflow_call:
-    inputs:
-      pure:
-        type: boolean
-        description: "The project is pure Python or not"
-        default: false
 
 jobs:
   check:
-    name: Ruff/Rustfmt/cargo check
+    name: Ruff + Rustfmt + cargo check
     runs-on: ubuntu-latest
 
     steps:
