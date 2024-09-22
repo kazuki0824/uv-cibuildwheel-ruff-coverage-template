@@ -36,6 +36,24 @@ jobs:
           cd ./rust/
           cargo check
 
+  tag_sanity:
+    runs-on: ubuntu-latest
+    name: Check tag name
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v2
+        with:
+          enable-cache: true
+
+      - name: RefName sanity
+        run: |
+          uv venv
+          uv pip install setuptools_scm
+          . .venv/bin/activate
+          python -m setuptools_scm
+
   buildwheel:
     name: Build
     if: github.event_name != 'pull_request'
@@ -45,7 +63,7 @@ jobs:
       fail-fast: true
 
     runs-on: ${{ matrix.os }}
-    needs: check
+    needs: [check, tag_sanity]
 
     steps:
       - uses: actions/checkout@v4
@@ -55,12 +73,6 @@ jobs:
         with:
           enable-cache: true
           cache-dependency-glob: "pyproject.toml"
-
-      - name: RefName sanity
-        run: |
-          uv venv
-          uv pip install setuptools_scm
-          python -m setuptools_scm
 
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
