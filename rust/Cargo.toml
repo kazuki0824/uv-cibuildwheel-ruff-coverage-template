@@ -16,8 +16,7 @@ lto = true
 # See https://github.com/PyO3/pyo3 for details
 name = "_lib"  # private module to be nested into Python package
 crate-type = ["cdylib"]
-path = "rust/lib.rs"
 
 [[bin]]
 name = "print-hello"
-path = "rust/print_hello.rs"
+path = "print_hello.rs"
