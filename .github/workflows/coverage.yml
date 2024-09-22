@@ -25,6 +25,10 @@ jobs:
       - name: Run coverage
         run: |
           uv run coverage run -m unittest discover  # unittestを用いたテストの実行
+
+      - name: Generate reports
+        continue-on-error: true
+        run: |
           uv run coverage report  # ターミナル上に結果表示
           uv run coverage html  # HTML形式でカバレッジレポートを出力
 
