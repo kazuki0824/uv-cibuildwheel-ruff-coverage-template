@@ -18,10 +18,7 @@ jobs:
           enable-cache: true
 
       - name: Run Ruff
-        run: |
-          uv venv
-          uv pip install ruff
-          uv run ruff check .
+        run: uvx ruff check .
 
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
@@ -60,7 +57,7 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: cibw-wheels-cp${{ matrix.python }}-${{ matrix.platform_id }}-${{ strategy.job-index }}
+          name: cibw-wheels-${{ matrix.os }}-${{ strategy.job-index }}
           path: ./wheelhouse/*.whl
 
  # === Release Job ===
@@ -83,5 +80,6 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: dist/*.whl
+          fail_on_unmatched_files: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
