@@ -6,7 +6,7 @@ on:
 
 jobs:
   check:
-    name: Ruff + Rustfmt + cargo check
+    name: Ruff
     runs-on: ubuntu-latest
     permissions:
       actions: read
@@ -23,22 +23,6 @@ jobs:
 
       - name: Run Ruff
         run: uvx ruff check . --preview
-
-      - name: Install Rust
-        uses: dtolnay/rust-toolchain@stable
-
-      - name: Setup Cache
-        uses: Swatinem/rust-cache@v2
-
-      - name: Run Rustfmt
-        run: |
-          cd ./rust/
-          cargo fmt --check
-
-      - name: Run cargo check
-        run: |
-          cd ./rust/
-          cargo check
 
   tag_sanity:
     runs-on: ubuntu-latest
@@ -101,12 +85,8 @@ jobs:
   buildwheel:
     name: Build
     if: github.event_name != 'pull_request'
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest]
-      fail-fast: false
 
-    runs-on: ${{ matrix.os }}
+    runs-on: windows-latest
     needs: [check, tag_sanity]
     permissions:
       actions: read
@@ -116,26 +96,14 @@ jobs:
       - uses: Kesin11/actions-timeline@v2
       - uses: actions/checkout@v4
 
-      - name: Install llvm (Windows)
-        uses: KyleMayes/install-llvm-action@v2
-        if: contains(matrix.os, 'windows')
-        with:
-          version: 16.0
-
       - name: Install uv
         uses: astral-sh/setup-uv@v5
         with:
           enable-cache: true
           cache-dependency-glob: "pyproject.toml"
 
-      - name: Install Rust
-        uses: dtolnay/rust-toolchain@stable
-
-      - name: Setup Cache
-        uses: Swatinem/rust-cache@v2
-
-      - name: Build wheels
-        uses: pypa/cibuildwheel@v2.22
+      - name: Build a pure python wheel
+        run: uvx --from build pyproject-build.exe
 
       - uses: actions/upload-artifact@v4
         with:
