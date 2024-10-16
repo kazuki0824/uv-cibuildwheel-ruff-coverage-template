@@ -24,22 +24,6 @@ jobs:
       - name: Run Ruff
         run: uvx ruff check . --preview
 
-      - name: Install Rust
-        uses: dtolnay/rust-toolchain@stable
-
-      - name: Setup Cache
-        uses: Swatinem/rust-cache@v2
-
-      - name: Run Rustfmt
-        run: |
-          cd ./rust/
-          cargo fmt --check
-
-      - name: Run cargo check
-        run: |
-          cd ./rust/
-          cargo check
-
   tag_sanity:
     runs-on: ubuntu-latest
     name: Check tag name
@@ -61,10 +45,6 @@ jobs:
   buildwheel:
     name: Build
     if: github.event_name != 'pull_request'
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest]
-      fail-fast: true
 
     runs-on: ${{ matrix.os }}
     needs: [check, tag_sanity]
@@ -82,23 +62,18 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "pyproject.toml"
 
-      - name: Install Rust
-        uses: dtolnay/rust-toolchain@stable
-
-      - name: Setup Cache
-        uses: Swatinem/rust-cache@v2
-
       - name: Build wheels
         continue-on-error: true
         uses: pypa/cibuildwheel@v2.21
 
       - name: Build a pure python wheel
         if: failure()
+        run: uvx build
 
       - uses: actions/upload-artifact@v4
         with:
-          name: cibw-wheels-${{ matrix.os }}-${{ strategy.job-index }}
-          path: ./wheelhouse/*.whl
+          name: cibw-wheel
+          path: ./dist/*.whl
 
  # === Release Job ===
   release:
