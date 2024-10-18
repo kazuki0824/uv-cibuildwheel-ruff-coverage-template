@@ -8,6 +8,8 @@ jobs:
   check:
     name: Ruff + Rustfmt + cargo check
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - uses: Kesin11/actions-timeline@v1
@@ -65,6 +67,8 @@ jobs:
 
     runs-on: ${{ matrix.os }}
     needs: [check, tag_sanity]
+    permissions:
+      contents: write
 
     steps:
       - uses: Kesin11/actions-timeline@v1
