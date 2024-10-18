@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: Kesin11/actions-timeline@v1
       - uses: actions/checkout@v4
 
       - name: Install uv
@@ -66,6 +67,7 @@ jobs:
     needs: [check, tag_sanity]
 
     steps:
+      - uses: Kesin11/actions-timeline@v1
       - uses: actions/checkout@v4
 
       - name: Install uv
