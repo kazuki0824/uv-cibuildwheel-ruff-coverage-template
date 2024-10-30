@@ -22,7 +22,7 @@ jobs:
           enable-cache: false
 
       - name: Run Ruff
-        run: uvx ruff check .
+        run: uvx ruff check . --preview
 
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
