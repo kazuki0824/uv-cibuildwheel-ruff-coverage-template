@@ -13,7 +13,7 @@ jobs:
       contents: read
 
     steps:
-      - uses: Kesin11/actions-timeline@v1
+      - uses: Kesin11/actions-timeline@v2
       - uses: actions/checkout@v4
 
       - name: Install uv
@@ -73,7 +73,7 @@ jobs:
       contents: read
 
     steps:
-      - uses: Kesin11/actions-timeline@v1
+      - uses: Kesin11/actions-timeline@v2
       - uses: actions/checkout@v4
 
       - name: Install uv
