@@ -6,7 +6,7 @@ on:
 
 jobs:
   check:
-    name: Ruff + Rustfmt + cargo check
+    name: Ruff
     runs-on: ubuntu-latest
     permissions:
       actions: read
@@ -62,12 +62,7 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "pyproject.toml"
 
-      - name: Build wheels
-        continue-on-error: true
-        uses: pypa/cibuildwheel@v2.21
-
       - name: Build a pure python wheel
-        if: failure()
         run: uvx build
 
       - uses: actions/upload-artifact@v4
