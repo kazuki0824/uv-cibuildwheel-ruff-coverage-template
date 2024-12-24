@@ -46,7 +46,7 @@ jobs:
     name: Build
     if: github.event_name != 'pull_request'
 
-    runs-on: ${{ matrix.os }}
+    runs-on: windows-latest
     needs: [check, tag_sanity]
     permissions:
       actions: read
