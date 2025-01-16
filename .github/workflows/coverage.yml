@@ -3,6 +3,12 @@ name: Python Coverage Report
 
 on:
   workflow_call:
+    inputs:
+      test_command:
+        default: 'unittest discover'
+        type: string
+        required: false
+        description: 'テスト実行時のモジュール・引数(python -m 以降)を渡す。'
 
 jobs:
   test:
@@ -25,7 +31,7 @@ jobs:
       - name: Run coverage
         run: |
           uv pip install coverage
-          uv run coverage run -m unittest discover  # unittestを用いたテストの実行
+          uv run coverage run -m ${{inputs.test_command}}
 
       - name: Generate reports
         continue-on-error: true
