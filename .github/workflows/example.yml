@@ -20,3 +20,10 @@ jobs:
     permissions:
       contents: write
       actions: read
+
+  docs:
+    uses: kazuki0824/uv-cibuildwheel-ruff-coverage-template/.github/workflows/docs.yml@main
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
