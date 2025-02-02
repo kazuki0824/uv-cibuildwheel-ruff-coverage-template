@@ -1,12 +1,7 @@
 name: Deploy Documentation to GitHub Pages
 
 on:
-  push:
-    branches:
-      - main  # mainブランチにプッシュされたら実行
-  pull_request:
-    branches:
-      - main  # プルリクエスト時にも実行
+  workflow_call:
 
 jobs:
   build-docs:
@@ -44,6 +39,7 @@ jobs:
           publish_dir: docs/build/html
 
   deploy-docs:
+     if: github.event_name == 'push'
      needs: build-docs
      permissions:
        pages: write
