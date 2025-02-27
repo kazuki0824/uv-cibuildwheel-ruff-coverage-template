@@ -13,23 +13,21 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
         with:
-          python-version: '3.12'  # 使用するPythonのバージョン
+          enable-cache: true
 
       - name: Install dependencies using uv
         run: |
-          python -m pip install --upgrade uv
           uv venv .venv
           source .venv/bin/activate
           uv pip install sphinx sphinx-rtd-theme
 
       - name: Build Sphinx documentation
         run: |
-          source .venv/bin/activate
-          sphinx-apidoc -o docs/source/ ./your_module  # your_module を適切なモジュール名に変更
-          sphinx-build -b html docs/source/ docs/build/html
+          uv run sphinx-apidoc -o docs/source/ ./your_module  # your_module を適切なモジュール名に変更
+          uv run sphinx-build -b html docs/source/ docs/build/html
 
       - name: Deploy to GitHub Pages
         if: github.ref == 'refs/heads/main'
