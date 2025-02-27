@@ -78,7 +78,7 @@ jobs:
 
       - name: Install llvm (Ubuntu)
         if: contains(matrix.os, 'ubuntu')
-        run: sudo apt install clang -y
+        run: sudo apt install libclang-dev -y
 
       - name: Install llvm (Windows)
         uses: KyleMayes/install-llvm-action@v2
