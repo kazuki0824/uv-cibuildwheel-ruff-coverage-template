@@ -76,10 +76,6 @@ jobs:
       - uses: Kesin11/actions-timeline@v2
       - uses: actions/checkout@v4
 
-      - name: Install llvm (Ubuntu)
-        if: contains(matrix.os, 'ubuntu')
-        run: sudo apt install libclang-dev -y
-
       - name: Install llvm (Windows)
         uses: KyleMayes/install-llvm-action@v2
         if: contains(matrix.os, 'windows')
