@@ -20,7 +20,7 @@ jobs:
       - name: Prepare venv
         run: |
           uv venv
-          uv pip install pyodide-build
+          uv pip install pyodide-build pip
 
       - name: Build
         run: |
