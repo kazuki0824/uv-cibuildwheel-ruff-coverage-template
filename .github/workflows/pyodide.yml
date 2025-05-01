@@ -1,0 +1,32 @@
+on:
+  workflow_call:
+
+jobs:
+  build:
+    name: Build wasm wheel
+    runs-on: windows-latest
+
+    steps:
+      - uses: Kesin11/actions-timeline@v2
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: false
+
+      - name: Install emscripten
+        run: scoop install emscripten -y
+
+      - name: Activate latest emsdk
+        run: emsdk activate latest
+
+      - name: Prepare venv
+        run: |
+          uv venv
+          uv pip install pyodide-build
+
+      - name: Build
+        run: |
+          ./.venv/Scripts/activate
+          pyodide build

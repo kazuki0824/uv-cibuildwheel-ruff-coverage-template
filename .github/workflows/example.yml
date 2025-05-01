@@ -13,10 +13,15 @@ on:
 
 jobs:
   coverage:
-    uses: kazuki0824/uv-cibuildwheel-ruff-coverage-template/.github/workflows/coverage.yml@pure
+    uses: kazuki0824/uv-cibuildwheel-ruff-coverage-template/.github/workflows/coverage.yml@main
 
   CI:
-    uses: kazuki0824/uv-cibuildwheel-ruff-coverage-template/.github/workflows/CI.yml@pure
+    uses: kazuki0824/uv-cibuildwheel-ruff-coverage-template/.github/workflows/CI.yml@main
     permissions:
       contents: write
       actions: read
+
+  pyodide:
+    uses: kazuki0824/uv-cibuildwheel-ruff-coverage-template/.github/workflows/pyodide.yml@main
+    permissions:
+      contents: write
