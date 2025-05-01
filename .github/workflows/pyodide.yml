@@ -4,7 +4,7 @@ on:
 jobs:
   build:
     name: Build wasm wheel
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
       - uses: Kesin11/actions-timeline@v2
@@ -15,11 +15,7 @@ jobs:
         with:
           enable-cache: false
 
-      - name: Install emscripten
-        run: scoop install emscripten -y
-
-      - name: Activate latest emsdk
-        run: emsdk activate latest
+      - uses: mymindstorm/setup-emsdk@v14
 
       - name: Prepare venv
         run: |
