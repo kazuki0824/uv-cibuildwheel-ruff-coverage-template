@@ -19,10 +19,11 @@ jobs:
         with:
           version: 3.1.58
 
-      - name: Prepare venv
+      - name: Prepare prerequisites
         run: |
           uv venv
           uv pip install pyodide-build pip
+          rustup default nightly
 
       - name: Build
         run: |
