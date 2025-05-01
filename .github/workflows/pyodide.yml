@@ -24,5 +24,5 @@ jobs:
 
       - name: Build
         run: |
-          . ./.venv/bin/activate.bash
+          . ./.venv/bin/activate
           pyodide build
