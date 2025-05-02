@@ -20,8 +20,3 @@ jobs:
     permissions:
       contents: write
       actions: read
-
-  pyodide:
-    uses: kazuki0824/uv-cibuildwheel-ruff-coverage-template/.github/workflows/pyodide.yml@main
-    permissions:
-      contents: write
