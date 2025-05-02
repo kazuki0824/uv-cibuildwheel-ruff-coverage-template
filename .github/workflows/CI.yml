@@ -83,9 +83,8 @@ jobs:
         run: |
           uv venv
           uv pip install pyodide-build pip
-          # workaround for https://github.com/PyO3/maturin/issues/2549#issuecomment-2797285836
-          rustup target add wasm32-unknown-emscripten --toolchain nightly-2024-03-07
-          rustup default nightly-2024-03-07
+          rustup target add wasm32-unknown-emscripten --toolchain nightly
+          rustup default nightly
 
       - name: Build a wheel
         run: |
