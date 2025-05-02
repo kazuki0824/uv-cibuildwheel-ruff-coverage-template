@@ -90,12 +90,12 @@ jobs:
       - name: Build a wheel
         run: |
           . ./.venv/bin/activate
-          pyodide build --output-dir wasm/
+          pyodide build
 
       - uses: actions/upload-artifact@v4
         with:
           name: wasm-wheel
-          path: ./wasm/*.whl
+          path: ./dist/*.whl
 
   buildwheel:
     name: Build
