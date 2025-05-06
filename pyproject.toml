@@ -22,6 +22,9 @@ test = [
     "ruff"
 ]
 
+[tool.distutils.bdist_wheel]
+py-limited-api = "cp310"
+
 [tool.setuptools.packages]
 # Pure Python packages/modules
 find = { where = ["src"] }
