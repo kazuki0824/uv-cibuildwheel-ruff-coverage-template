@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=64", "setuptools-scm>=8", "setuptools-rust"]
+requires = ["setuptools>=64", "setuptools-scm>=8", "setuptools-rust>=0.14"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -21,6 +21,9 @@ dependencies = [
 test = [
     "ruff"
 ]
+
+[tool.distutils.bdist_wheel]
+py-limited-api = "cp310"
 
 [tool.setuptools.packages]
 # Pure Python packages/modules

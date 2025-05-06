@@ -60,6 +60,7 @@ jobs:
 
   buildwheel-pyodide:
     name: Build wasm wheel
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     needs: [check, tag_sanity]
     permissions:
@@ -101,7 +102,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest]
-      fail-fast: true
+      fail-fast: false
 
     runs-on: ${{ matrix.os }}
     needs: [check, tag_sanity]
