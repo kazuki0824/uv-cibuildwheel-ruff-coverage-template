@@ -82,14 +82,13 @@ jobs:
       - name: Prepare prerequisites
         run: |
           uv venv
-          uv pip install pyodide-build pip
           rustup target add wasm32-unknown-emscripten --toolchain nightly
           rustup default nightly
 
       - name: Build a wheel
         run: |
           . ./.venv/bin/activate
-          pyodide build
+          uvx --from pyodide-build --with pyodide-cli pyodide build
 
       - uses: actions/upload-artifact@v4
         with:
