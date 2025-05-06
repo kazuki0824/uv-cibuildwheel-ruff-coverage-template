@@ -88,7 +88,7 @@ jobs:
       - name: Build a wheel
         run: |
           . ./.venv/bin/activate
-          emsdk update
+          uvx --from pyodide-build --with pyodide-cli pyodide xbuildenv use 0.28.0a1
           uvx --from pyodide-build --with pyodide-cli pyodide build
 
       - uses: actions/upload-artifact@v4
