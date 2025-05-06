@@ -84,7 +84,7 @@ jobs:
           uv venv
           rustup target add wasm32-unknown-emscripten --toolchain nightly
           rustup default nightly
-          uvx --from pyodide-build --with pyodide-cli pyodide xbuildenv install 0.28.0a1
+          uvx --from pyodide-build --with pyodide-cli pyodide xbuildenv install 0.28.0a1 -f
           uvx --from pyodide-build --with pyodide-cli pyodide xbuildenv use 0.28.0a1
 
       - name: Build a wheel
