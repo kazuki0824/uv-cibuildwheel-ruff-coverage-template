@@ -101,7 +101,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest]
-      fail-fast: true
+      fail-fast: false
 
     runs-on: ${{ matrix.os }}
     needs: [check, tag_sanity]
