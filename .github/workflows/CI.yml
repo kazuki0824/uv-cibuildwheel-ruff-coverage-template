@@ -60,6 +60,7 @@ jobs:
 
   buildwheel-pyodide:
     name: Build wasm wheel
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     needs: [check, tag_sanity]
     permissions:
