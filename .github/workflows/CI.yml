@@ -78,14 +78,16 @@ jobs:
 
       - uses: mymindstorm/setup-emsdk@v14
         with:
-          version: 4.0.6
+          version: 3.1.74
+          # https://github.com/godot-rust/gdext/issues/438#issuecomment-2728150420
 
-      - name: Prepare prerequisites
+      - name: Prepare Rust
         run: |
           rustup target add wasm32-unknown-emscripten --toolchain nightly
           rustup default nightly
-          uvx --from pyodide-build --with pyodide-cli pyodide xbuildenv install 0.28.0a1 -f
-          uvx --from pyodide-build --with pyodide-cli pyodide xbuildenv use 0.28.0a1
+
+      - name: Prepare xbuildenv
+        run:  uvx --from pyodide-build --with pyodide-cli pyodide xbuildenv install --url https://github.com/pyodide/pyodide-build-environment-nightly/releases/download/20250320/xbuildenv.tar.bz2
 
       - name: Build a wheel
         run: |
