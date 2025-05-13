@@ -95,7 +95,7 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: wasm-wheel
+          name: build-wasm-wheel
           path: ./dist/*.whl
 
   buildwheel:
@@ -139,7 +139,7 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: cibw-wheels-${{ matrix.os }}-${{ strategy.job-index }}
+          name: build-cibw-wheels-${{ matrix.os }}-${{ strategy.job-index }}
           path: ./wheelhouse/*.whl
 
  # === Release Job ===
@@ -155,7 +155,7 @@ jobs:
       - name: Download wheel artifacts
         uses: actions/download-artifact@v4
         with:
-          pattern: cibw-*
+          pattern: build-*
           path: dist
           merge-multiple: true
 
